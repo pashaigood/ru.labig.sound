@@ -19,15 +19,11 @@
     },
     "bugs": "/issues",
     "dependencies": {
-        "jquery": ">=2.1.1",
         "the.module": "*",
-        "swfobject": "*",
-        "recorder-js": "*"
+        "swfobject": "*"
     },
     "main": [
-        "app/css/ig-sound-record",
-        "app/img/sprites.gif",
-        "app/js/ig-sound-record"
+        "app/dist/ig-sound-record.min.js"
     ],
     "ignore": [
         "/*.*",
@@ -42,5 +38,9 @@
     "authors": [
         "Pavel Belugin <pashaigood@gmail.com>"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "devDependencies": {
+        "jquery": ">=2.1.1",
+        "recorder-js": "*"
+    }
 }
