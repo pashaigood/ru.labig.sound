@@ -2,7 +2,10 @@ var Recorder = require('jwagener/Recorder');
 
 module.exports = the.module({
 	Flash : { //implements : ['ig.sound.record.IRecorder'],
-		inited : false,
+		our: {
+            swfPath: '/recorder.swf'
+        },
+        inited : false,
 		
 		Flash : function(callback) {
             callback = callback || function(){};
@@ -20,9 +23,8 @@ module.exports = the.module({
         init: function(callback) {
             var self = this;
             Recorder.initialize({
-                //TODO положить ещё кудан-ибуть
-                swfSrc: "/recorder.swf",
-//                swfSrc: "http://ibrislab.com/cdn/jwagener/recorder.swf",
+                //TODO положить ещё куда-нибуть
+                swfSrc: self.our.swfPath,
                 initialized : function() {
                     Recorder.record({
                         start : function() {
