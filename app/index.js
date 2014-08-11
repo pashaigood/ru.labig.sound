@@ -9,7 +9,7 @@ $(function () {
     $('.record').click(function () {
         console.log('before start');
         recorder.start(function (err) {
-            if (!err) {
+            if (! err) {
 
                 console.log('start');
 

@@ -30,7 +30,7 @@ module.exports = the.module({
 						this.engine = engines.WEB;
 
                         //Вызов для тестов
-						this.engine = engines.Flash;
+//						this.engine = engines.Flash;
 					}
 					else {
 						this.engine = engines.Flash;
