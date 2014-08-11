@@ -15,6 +15,19 @@ module.exports = function (grunt) {
             app: require('./bower.json').appPath || 'app'
         },
 
+        uglify: {
+            options: {
+                compress: {
+                    drop_console: true
+                }
+            },
+            dist: {
+                files: {
+                    '<%= bowerApp.app %>/dist/ig-sound-record.min.js': ['.tmp/js/ig-sound-record.lmd.js']
+                }
+            }
+        },
+
         lmd: {
             dist: {
                 projectRoot: '<%= bowerApp.app %>',
@@ -72,19 +85,7 @@ module.exports = function (grunt) {
                 // Change this to '0.0.0.0' to access the server from outside.
                 hostname: 'localhost',
                 livereload: 35729,
-                base: '<%= bowerApp.app %>',
-
-//                middleware: function(connect, options, middlewares) {
-//                    console.log('middle');
-//                    // inject a custom middleware into the array of default middlewares
-//                    middlewares.unshift(function(req, res, next) {
-//                        if (req.url !== '/test') return next();
-//
-//                        res.end('Hello, world from port #' + options.port + '!');
-//                    });
-//
-//                    return middlewares;
-//                }
+                base: '<%= bowerApp.app %>'
             },
             livereload: {
                 options: {
@@ -139,7 +140,7 @@ module.exports = function (grunt) {
         // Automatically inject Bower components into the app
         bowerInstall: {
             app: {
-                src: ['<%= bowerApp.app %>/index.html'],
+                src: ['<%= bowerApp.app %>/index.html', '<%= bowerApp.app %>/index-dist.html'],
                 ignorePath: '<%= bowerApp.app %>/'
             }
         },
@@ -156,8 +157,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-express');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-lmd');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // Register new tasks
     grunt.registerTask('serve', ['bowerInstall', 'connect', 'lmd', 'watch']);
+    grunt.registerTask('build', ['bowerInstall', 'lmd', 'uglify:dist']);
+
     grunt.registerTask('publish', ['shell:bowerRegister']);
 }
