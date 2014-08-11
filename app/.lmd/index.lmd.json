@@ -1,0 +1,14 @@
+{
+    "name": "index build",
+    "root": "../js",
+    "output": "../../.tmp/js/ig-sound-record.lmd.js",
+    "modules": {
+    	"<%= subdir %>*": "**/*.js"
+    },
+    "main": "ig-sound-record",
+    "sourcemap": "../../.tmp/js/ig-sound-record.lmd.map",
+    "sourcemap_inline": true,
+    "sourcemap_www": "/js",
+    "sourcemap_url": "/js/ig-sound-record.lmd.map",
+    "depends": false
+}

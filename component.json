@@ -1,0 +1,12 @@
+{
+    "name": "ig-sound-record",
+    "version": "0.0.1",
+    "main": [
+        "app/css/ig-sound-record",
+        "app/img/sprites.gif",
+        "app/js/ig-sound-record"
+    ],
+    "dependencies": {
+        "jquery": ">=2.1.1"
+    }
+}

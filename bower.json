@@ -1,0 +1,46 @@
+{
+    "name": "ig-sound-record",
+    "version": "0.0.1",
+    "title": "ig-sound-record",
+    "appPath": "app",
+    "description": "",
+    "keywords": [
+        "image",
+        "video",
+        "gallery"
+    ],
+    "homepage": "",
+    "author": {
+        "name": "Pavel Belugin"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://.git"
+    },
+    "bugs": "/issues",
+    "dependencies": {
+        "jquery": ">=2.1.1",
+        "the.module": "*",
+        "swfobject": "*",
+        "recorder-js": "*"
+    },
+    "main": [
+        "app/css/ig-sound-record",
+        "app/img/sprites.gif",
+        "app/js/ig-sound-record"
+    ],
+    "ignore": [
+        "/*.*",
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "app/bower_components",
+        "test",
+        "tests",
+        ".tmp"
+    ],
+    "authors": [
+        "Pavel Belugin <pashaigood@gmail.com>"
+    ],
+    "license": "MIT"
+}

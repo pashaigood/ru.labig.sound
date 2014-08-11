@@ -1,0 +1,35 @@
+namespace('ig.sound', {
+	IRecorder : {
+		/**
+		 * Готов ли движок к работе 
+		 */
+		inited : false,
+
+		constructor: function (callback) {},
+
+		/**
+		 * Метод начинает запись звука. 
+		 */
+		start : function(callback) {},
+		
+		/**
+		 * Метод останавливает запис звука. 
+		 */
+		stop : function() {},
+		
+		/**
+		 * Метод возвращает записанный звук в формате wav
+		 */
+		getBuffer : function() {},
+		
+		/**
+		 * Метод загружет wav файл на сервет
+		 */
+		upload : function(url, callback) {},
+		
+		/**
+		 * Вызывается когда доступны дынные записанного звука
+		 */
+		onExportWAV : function(sound_data) {}
+	}
+});
