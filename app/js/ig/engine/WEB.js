@@ -67,6 +67,18 @@ module.exports = the.module({
                 });
         },
 
+        play: function() {
+            this.recorder.exportWAV(function(blob) {
+                var url = URL.createObjectURL(blob);
+                var au = document.createElement('audio');
+
+                au.controls = false;
+                au.src = url;
+                au.volume = 1;
+                au.play();
+            });
+        },
+
         stop: function () {
             var self = this;
             self.recorder.stop();
