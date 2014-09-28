@@ -16,6 +16,11 @@ namespace('ig.sound', {
 		 * Метод останавливает запис звука. 
 		 */
 		stop : function() {},
+
+		/**
+		* Метод проигрывает записанный звук.
+		*/
+		play : function() {},
 		
 		/**
 		 * Метод возвращает записанный звук в формате wav
@@ -25,7 +30,7 @@ namespace('ig.sound', {
 		/**
 		 * Метод загружет wav файл на сервет
 		 */
-		upload : function(url, callback) {},
+		upload : function(url, callback = false) {},
 		
 		/**
 		 * Вызывается когда доступны дынные записанного звука
