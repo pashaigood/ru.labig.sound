@@ -5,7 +5,68 @@ var Recorder = require('mattdiamond/Recorder');
  */
 module.exports = the.module({
     WEB: { //implements : ['ig.sound.record.IRecorder'],
-        stream: 0,
+        our: {
+            stream: 0,
+            setupStream: function () {
+                var self = this,
+                    audio_context = self.context,
+                    input = audio_context.createMediaStreamSource(self.stream),
+                    zeroGain;
+
+                input.connect(self.inputPoint);
+                zeroGain = audio_context.createGain();
+                zeroGain.gain.value = 0.0;
+                input.connect(zeroGain);
+                zeroGain.connect(audio_context.destination);
+            },
+
+            createInput: function() {
+                var self = this;
+                if (! self.inputPoint) {
+
+                    self.context = new AudioContext;
+                    return (self.inputPoint = self.context.createGain());
+                }
+                else {
+                    return self.inputPoint;
+                }
+            },
+
+            getStream: function (callback) {
+                var our = this;
+                if (our.stream === 0) {
+                    our.stream = 1;
+                    navigator.getUserMedia(
+                        {
+                            audio: true
+                        },
+                        function (stream) {
+                            callback(false, (our.stream = stream));
+                        },
+                        function (err) {
+                            callback(err);
+                        }
+                    )
+                }
+                else
+                if (our.stream === 1) {
+                    console.log('in request');
+                }
+                else {
+                    callback(false, our.stream);
+                }
+            },
+
+            setup: function(callback) {
+                var our = this;
+                our.getStream(function() {
+                    our.setupStream();
+                });
+
+                return our.createInput();
+            }
+        },
+
         inited: false,
 
         /**
@@ -19,27 +80,16 @@ module.exports = the.module({
          * @constructor
          */
         WEB: function (callback) {
-            callback = callback || function () {
-            };
+            callback = callback || function () {};
             var self = this;
+
+
             self.init(callback);
         },
 
         init: function (callback) {
-            var self = this,
-                audio_context = self.context = new AudioContext,
-                inputPoint = self.inputPoint = audio_context.createGain();
-
-            self.recorder = new Recorder(inputPoint);
-
-            self.start(function (err) {
-                if (!err) {
-                    self.stop();
-                    self.inited = true;
-                }
-
-                callback(err);
-            });
+            var self = this;
+            self.recorder = new Recorder(self.our.setup());
         },
 
         _start: function(callback) {
@@ -50,21 +100,9 @@ module.exports = the.module({
         },
 
         start: function (callback) {
-            callback = callback || function () {
-            };
+            callback = callback || function () {};
             var self = this;
-
-                self.getStream(function (err, stream) {
-                    if (! err) {
-                        self.stream = stream;
-                        self.setupStream();
-
-                        self._start(callback);
-                    }
-                    else {
-                        callback(err);
-                    }
-                });
+            self._start(callback);
         },
 
         play: function() {
@@ -82,39 +120,8 @@ module.exports = the.module({
         stop: function () {
             var self = this;
             self.recorder.stop();
-            self.stream.stop();
         },
 
-        setupStream: function () {
-            var self = this,
-                audio_context = self.context,
-                input = audio_context.createMediaStreamSource(self.stream),
-                zeroGain;
-
-            input.connect(self.inputPoint);
-            zeroGain = audio_context.createGain();
-            zeroGain.gain.value = 0.0;
-            input.connect(zeroGain);
-            zeroGain.connect(audio_context.destination);
-        },
-
-        getStream: function (callback) {
-            navigator.getUserMedia(
-                {
-                    audio: true
-                },
-                function (stream) {
-                    callback(false, stream);
-                },
-                function (err) {
-                    callback(err);
-                }
-            )
-        },
-
-        //Пока не нужно
-        getBuffer: function () {
-        },
 
         upload: function (url, callback) {
             callback = callback || function () {
