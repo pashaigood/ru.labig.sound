@@ -42,25 +42,29 @@ module.exports = the.module({
             });
         },
 
+        _start: function(callback) {
+            var recorder = this.recorder;
+            recorder.clear();
+            recorder.record();
+            callback();
+        },
+
         start: function (callback) {
             callback = callback || function () {
             };
             var self = this;
 
-            self.getStream(function (err, stream) {
-                if (! err) {
-                    self.stream = stream;
-                    self.setupStream();
+                self.getStream(function (err, stream) {
+                    if (! err) {
+                        self.stream = stream;
+                        self.setupStream();
 
-                    var recorder = self.recorder;
-                    recorder.clear();
-                    recorder.record();
-                    callback();
-                }
-                else {
-                    callback(err);
-                }
-            });
+                        self._start(callback);
+                    }
+                    else {
+                        callback(err);
+                    }
+                });
         },
 
         stop: function () {
