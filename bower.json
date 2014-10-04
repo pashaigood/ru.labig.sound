@@ -1,6 +1,6 @@
 {
     "name": "ig-sound-record",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "title": "ig-sound-record",
     "appPath": "app",
     "description": "",
@@ -40,7 +40,7 @@
     ],
     "license": "MIT",
     "devDependencies": {
-        "jquery": ">=2.1.1",
+        "jquery": "~1.10.*",
         "recorder-js": "*"
     }
 }

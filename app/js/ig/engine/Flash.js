@@ -3,7 +3,7 @@ var Recorder = require('jwagener/Recorder');
 module.exports = the.module({
 	Flash : { //implements : ['ig.sound.record.IRecorder'],
 		our: {
-            swfPath: '/recorder.swf'
+            swfPath: 'recorder.swf'
         },
         inited : false,
 		
