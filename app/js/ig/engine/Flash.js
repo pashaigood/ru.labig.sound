@@ -14,7 +14,7 @@ module.exports = the.module({
 			if (self.our.singleton) {
 				return self.our.singleton;
 			}
-			
+
 			self.our.singleton = self;
 
             self.init(callback);
@@ -50,7 +50,11 @@ module.exports = the.module({
                 callback(new Error('Engine not init'));
             }
 		},
-		
+
+        play: function() {
+            Recorder.play();
+        },
+
 		stop : function() {
 			Recorder.stop();
 		},
