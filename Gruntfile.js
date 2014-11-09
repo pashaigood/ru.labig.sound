@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    '<%= bowerApp.app %>/dist/ig-sound-record.min.js': ['.tmp/js/ig-sound-record.lmd.js']
+                    'dist/ig-sound-record.min.js': ['.tmp/js/ig-sound-record.lmd.js']
                 }
             }
         },
@@ -104,8 +104,8 @@ module.exports = function (grunt) {
                             var form = new formidable.IncomingForm();
                             form.parse(req, function (err, fields, files) {
                                 res.writeHead(200, {'content-type': 'text/plain'});
-                                res.write('received upload:\n\n');
-                                res.end(util.inspect({fields: fields, files: files}));
+//                                res.write('received upload:\n\n');
+                                res.end(JSON.stringify( util.inspect({fields: fields, files: files})));
                             });
 
 //                            return;
@@ -140,6 +140,7 @@ module.exports = function (grunt) {
         // Automatically inject Bower components into the app
         bowerInstall: {
             app: {
+                devDependencies: true,
                 src: ['<%= bowerApp.app %>/index.html', '<%= bowerApp.app %>/index-dist.html'],
                 ignorePath: '<%= bowerApp.app %>/'
             }

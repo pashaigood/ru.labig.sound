@@ -23,7 +23,7 @@
         "swfobject": "*"
     },
     "main": [
-        "app/dist/ig-sound-record.min.js"
+        "dist/ig-sound-record.min.js"
     ],
     "ignore": [
         "/*.*",
