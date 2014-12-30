@@ -89,7 +89,6 @@ module.exports = the.module({
             if (self.isReady()) {
                 self.our.getStream(function (err, stream) {
                     if (! err) {
-                        window.stream = stream;
                         self.stream = stream;
                         self.setupStream();
 

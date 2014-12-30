@@ -1,11 +1,19 @@
 namespace('ig.sound', {
 	IRecorder : {
-		/**
-		 * Готов ли движок к работе 
-		 */
-		inited : false,
+	    our: {
+	        /**
+             * Готов ли движок к работе
+             */
+            isInit: false,
+	        init: function(callback){}
+	    },
 
 		constructor: function (callback) {},
+
+        /**
+         * Сообщает, готов ли движок для работы.
+         */
+        isReady: function() {},
 
 		/**
 		 * Метод начинает запись звука. 
@@ -30,11 +38,6 @@ namespace('ig.sound', {
 		/**
 		 * Метод загружет wav файл на сервет
 		 */
-		upload : function(url, callback = false) {},
-		
-		/**
-		 * Вызывается когда доступны дынные записанного звука
-		 */
-		onExportWAV : function(sound_data) {}
+		upload : function(url, callback = false) {}
 	}
 });

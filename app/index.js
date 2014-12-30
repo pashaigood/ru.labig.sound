@@ -4,21 +4,24 @@ $(function () {
         console.log(arguments, 'init');
     }
 
-    var recorder = new ig.sound.record.Wav(onInit),
-        recorder2 = new ig.sound.record.Wav(onInit);
+//    console.log (ig.sound.record.Wav.init());
 
-    function record(recorder) {
+    recTest = new ig.sound.record.Wav();
+    recorder2 = new ig.sound.record.Wav();
+
+
+    function record(recTest) {
         console.log('before start');
-        recorder.start(function (err) {
+        recTest.start(function (err) {
             if (! err) {
 
                 console.log('start');
 
                 setTimeout(function () {
-                    recorder.stop();
+                    recTest.stop();
                     console.log('stop record');
-                    recorder.upload('/test');
-                }, 5000);
+                    recTest.upload('/test');
+                }, 2000);
             }
             else {
                 console.log(err);
@@ -28,11 +31,11 @@ $(function () {
     }
 
     $('.record').click(function () {
-        record(recorder);
+        record(recTest);
     });
 
     $('.play').click(function() {
-        recorder.play();
+        recTest.play();
     });
 
     $('.record2').click(function () {
