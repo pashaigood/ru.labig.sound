@@ -29,7 +29,8 @@
     worker.postMessage({
       command: 'init',
       config: {
-        sampleRate: this.context.sampleRate
+        sampleRate: this.context.sampleRate,
+          bufferSize: bufferLen
       }
     });
     
@@ -45,7 +46,7 @@
           e.inputBuffer.getChannelData(1)
         ]
       });
-    }
+    };
 
     this.configure = function(cfg){
       for (var prop in cfg){
@@ -53,24 +54,24 @@
           config[prop] = cfg[prop];
         }
       }
-    }
+    };
 
     this.record = function(){
       recording = true;
-    }
+    };
 
     this.stop = function(){
       recording = false;
-    }
+    };
 
     this.clear = function(){
       worker.postMessage({ command: 'clear' });
-    }
+    };
 
     this.getBuffer = function(cb) {
       currCallback = cb || config.callback;
       worker.postMessage({ command: 'getBuffer' })
-    }
+    };
 
     this.exportWAV = function(cb, type){
       currCallback = cb || config.callback;
@@ -80,12 +81,12 @@
         command: 'exportWAV',
         type: type
       });
-    }
+    };
 
     worker.onmessage = function(e){
       var blob = e.data;
       currCallback(blob);
-    }
+    };
 
     source.connect(this.node);
     this.node.connect(this.context.destination);    //this should not be necessary
@@ -99,7 +100,7 @@
     var click = document.createEvent("Event");
     click.initEvent("click", true, true);
     link.dispatchEvent(click);
-  }
+  };
 
 
     module.exports = Recorder;

@@ -123,8 +123,8 @@ module.exports = function() {
         writeString(view, 36, 'data');
         /* data chunk length */
         view.setUint32(40, samples.length * 2, true);
-
-        floatTo16BitPCM(view, 44, samples);
+        floatTo16BitPCMNormalize(view, 44, samples);
+//        floatTo16BitPCM(view, 44, samples);
 //        samplesPCM(samples, view);
         return view;
     }
@@ -146,11 +146,33 @@ module.exports = function() {
         }
     }
 
+    function floatTo16BitPCMNormalize(output, offset, input) {
+        var samples = input;
+
+        // Нормализация сигнала.
+        var xmin = samples[0],
+            xmax = samples[0],
+            length = samples.length;
+
+        while(length-=1) {
+            xmin = Math.min(xmin, samples[length]);
+            xmax = Math.max(xmax, samples[length]);
+        }
+
+        var dx = xmax - xmin;
+
+        for (var i = 0; i < input.length; i++, offset+=2) {
+            samples[i] = (samples[i] - xmin) * 2 / dx - 1;
+            // Заливка занных.
+            var s = Math.max(-1, Math.min(1, input[i]));
+            output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+        }
+    }
+
     function floatTo16BitPCM(output, offset, input){
         for (var i = 0; i < input.length; i++, offset+=2) {
             var s = Math.max(-1, Math.min(1, input[i]));
             output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
         }
     }
-
 };

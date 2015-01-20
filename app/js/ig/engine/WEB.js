@@ -1,6 +1,4 @@
 var Recorder = require('mattdiamond/Recorder');
-//require('audiolib');
-
 
 /**
  * @author PBelugin
@@ -140,13 +138,13 @@ module.exports = the.module({
             var self = this,
                 audioContext = self.our.context,
                 source = audioContext.createMediaStreamSource(self.stream),
-                zeroGain;
+                zeroGain = audioContext.createGain();
 
             source.connect(self.inputPoint);
-            zeroGain = audioContext.createGain();
-            zeroGain.gain.value = 0.0;
-            zeroGain.connect(audioContext.destination);
-            source.connect(zeroGain);
+//            zeroGain = audioContext.createGain();
+//            zeroGain.gain.value = 0.0;
+//            zeroGain.connect(audioContext.destination);
+//            source.connect(zeroGain);
         },
 
         //Пока не нужно
