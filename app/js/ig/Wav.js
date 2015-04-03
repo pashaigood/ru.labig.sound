@@ -24,7 +24,7 @@ var engines = {
         engine = engines.WEB;
 
         //Вызов для тестов
-//		engine = engines.Flash;
+		engine = engines.Flash;
     }
     else {
         engine = engines.Flash;

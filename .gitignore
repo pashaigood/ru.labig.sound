@@ -3,5 +3,5 @@ node_modules/
 app/bower_components/
 .idea
 .tmp
-app/files/audio.wav
+app/files
 temp
